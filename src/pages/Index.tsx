@@ -1,9 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
 import AudioPlayer from "@/components/AudioPlayer";
 import Win95Window from "@/components/Win95Window";
 import { supabase } from "@/lib/supabase";
 import { BlogPost } from "@/types/blog";
+import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -24,12 +24,12 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-win95-desktop p-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Win95Window title="About Me" className="md:col-span-2">
+        <Win95Window title="readme.md" className="md:col-span-2">
           <div className="prose font-system">
-            <h1 className="text-2xl mb-4">Welcome to My Audio Portfolio</h1>
+            <h1 className="text-2xl mb-4">cruz-wootten.exe</h1>
             <p className="mb-4">
-              Hi! I'm a sound creator and this is my Windows 95-themed portfolio.
-              Feel free to explore my audio works and blog posts.
+              Hi! My name is Cruz Wootten, welcome to my page! I have been a technician of many sorts for the last 10 years. In my personal time I'm an audio enthusiast and you can browse some of my work below. I also create UGC content in Fortnite under the name Lil Wikipedia, please check it out!
+              Feel free to explore this site, or add me on any social media platforms if you'd like to connect! Thanks!
             </p>
           </div>
         </Win95Window>
