@@ -1,9 +1,51 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Win95Window from "./Win95Window";
+import { supabase } from "@/lib/supabase";
+
+interface AudioTrack {
+  name: string;
+  url: string;
+}
 
 const AudioPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [tracks, setTracks] = useState<AudioTrack[]>([]);
+  const [currentTrack, setCurrentTrack] = useState<AudioTrack | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    loadTracks();
+  }, []);
+
+  const loadTracks = async () => {
+    try {
+      const { data: files, error } = await supabase.storage
+        .from('audio')
+        .list();
+
+      if (error) {
+        console.error('Error loading tracks:', error);
+        return;
+      }
+
+      const trackList = await Promise.all(
+        files.map(async (file) => {
+          const { data: { publicUrl } } = supabase.storage
+            .from('audio')
+            .getPublicUrl(file.name);
+
+          return {
+            name: file.name,
+            url: publicUrl
+          };
+        })
+      );
+
+      setTracks(trackList);
+    } catch (error) {
+      console.error('Error loading tracks:', error);
+    }
+  };
 
   const togglePlay = () => {
     if (audioRef.current) {
@@ -16,17 +58,29 @@ const AudioPlayer = () => {
     }
   };
 
+  const playTrack = (track: AudioTrack) => {
+    setCurrentTrack(track);
+    setIsPlaying(true);
+    if (audioRef.current) {
+      audioRef.current.src = track.url;
+      audioRef.current.play();
+    }
+  };
+
   return (
     <Win95Window title="Audio Player" className="w-[400px]">
       <div className="space-y-4">
         <div className="bg-white border border-win95-darkBorder p-2 h-32 overflow-y-auto">
           <div className="font-system text-sm">
-            <p className="cursor-pointer hover:bg-win95-blue hover:text-white p-1">
-              track1.mp3
-            </p>
-            <p className="cursor-pointer hover:bg-win95-blue hover:text-white p-1">
-              track2.wav
-            </p>
+            {tracks.map((track) => (
+              <p
+                key={track.name}
+                onClick={() => playTrack(track)}
+                className="cursor-pointer hover:bg-win95-blue hover:text-white p-1"
+              >
+                {track.name}
+              </p>
+            ))}
           </div>
         </div>
         <div className="flex items-center space-x-2">
@@ -40,7 +94,11 @@ const AudioPlayer = () => {
             <div className="bg-win95-blue h-full w-0"></div>
           </div>
         </div>
-        <audio ref={audioRef} />
+        <audio 
+          ref={audioRef}
+          onEnded={() => setIsPlaying(false)}
+          src={currentTrack?.url}
+        />
       </div>
     </Win95Window>
   );
