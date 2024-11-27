@@ -1,6 +1,6 @@
 
 import { createClient } from '@/utils/supabase/server'
-import { cookies } from 'next/headers'
+// import { cookies } from '@/next/headers'
 
 export default async function Page() {
   const cookieStore = await cookies()
@@ -16,3 +16,7 @@ export default async function Page() {
     </ul>
   )
 }
+function cookies() {
+  throw new Error('Function not implemented.')
+}
+
