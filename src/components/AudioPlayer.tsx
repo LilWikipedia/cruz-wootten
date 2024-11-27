@@ -20,7 +20,7 @@ const AudioPlayer = () => {
   const loadTracks = async () => {
     try {
       const { data: files, error } = await supabase.storage
-        .from('beats-by-cruz')
+        .from('beats-by-cruz/.')
         .list();
 
       if (error) {
@@ -31,7 +31,7 @@ const AudioPlayer = () => {
       const trackList = await Promise.all(
         files.map(async (file) => {
           const { data: { publicUrl } } = supabase.storage
-            .from('beats-by-cruz')
+            .from('beats-by-cruz/.')
             .getPublicUrl(file.name);
 
           return {
