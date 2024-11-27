@@ -20,7 +20,7 @@ const AudioPlayer = () => {
   const loadTracks = async () => {
     try {
       const { data: files, error } = await supabase.storage
-        .from('audio')
+        .from('beats-by-cruz')
         .list();
 
       if (error) {
@@ -31,7 +31,7 @@ const AudioPlayer = () => {
       const trackList = await Promise.all(
         files.map(async (file) => {
           const { data: { publicUrl } } = supabase.storage
-            .from('audio')
+            .from('beats-by-cruz')
             .getPublicUrl(file.name);
 
           return {
@@ -68,7 +68,7 @@ const AudioPlayer = () => {
   };
 
   return (
-    <Win95Window title="Audio Player" className="w-[400px]">
+    <Win95Window title="beats-by-cruz" className="w-[400px]">
       <div className="space-y-4">
         <div className="bg-white border border-win95-darkBorder p-2 h-32 overflow-y-auto">
           <div className="font-system text-sm">
