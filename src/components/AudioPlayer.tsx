@@ -20,13 +20,12 @@ const AudioPlayer = () => {
 
   const loadTracks = async () => {
     try {
-      // First, list all files in the bucket
-      const { data: files, error: listError } = await supabase.storage
+      const { data: files, error } = await supabase.storage
         .from('beats-by-cruz')
         .list();
 
-      if (listError) {
-        console.error('Error listing files:', listError);
+      if (error) {
+        console.error('Error listing files:', error);
         setError('Failed to load tracks listing');
         return;
       }
@@ -69,6 +68,9 @@ const AudioPlayer = () => {
       setError('Failed to load audio tracks');
     }
   };
+
+ 
+
 
   const handlePlay = () => {
     if (audioRef.current) {
