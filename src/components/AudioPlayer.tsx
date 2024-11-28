@@ -67,6 +67,11 @@ const AudioPlayer = () => {
       console.error('Error in loadTracks:', err);
       setError('Failed to load audio tracks');
     }
+  
+
+  // Rest of your component remains the same
+
+
   };
 
  
