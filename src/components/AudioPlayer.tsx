@@ -23,6 +23,7 @@ const AudioPlayer = () => {
       const { data: files, error } = await supabase.storage
         .from('beats-by-cruz')
         .list();
+        
 
       if (error) {
         console.error('Error listing files:', error);
@@ -41,6 +42,7 @@ const AudioPlayer = () => {
       const trackList = await Promise.all(
         files
           .filter(file => file.name.match(/\.(mp3|wav|ogg)$/i)) // Only audio files
+          .reverse() // Reverse the list to get newest first
           .map(async (file) => {
             const { data: { publicUrl } } = supabase.storage
               .from('beats-by-cruz')
@@ -97,7 +99,7 @@ const AudioPlayer = () => {
   };
 
   return (
-    <Win95Window title="Audio Player">
+    <Win95Window title="beats-by-cruz.lib">
       <div className="p-4">
         {error && <div className="text-red-500 mb-4">{error}</div>}
         

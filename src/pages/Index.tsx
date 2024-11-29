@@ -84,15 +84,14 @@ const Index = () => {
         onFocus={() => handleWindowFocus('readme')}
       >
         <div className="prose font-system">
-          <h1 className="text-2xl mb-4">cruz-wootten.exe</h1>
+          <h1 className="text-2xl mb-4">about</h1>
           <p className="mb-4">
-            Hi! My name is Cruz Wootten, welcome to my page! I have been a technician of many sorts for the last 10 years. In my personal time I'm an audio enthusiast and you can browse some of my work below. I also create UGC content in Fortnite under the name Lil Wikipedia, please check it out!
-            Feel free to explore this site, or add me on any social media platforms if you'd like to connect! Thanks!
+            Hi! My name is Cruz Wootten,
           </p>
         </div>
       </Win95Window>
 
-      {/* Audio Player Window */}
+      {/* Audio Player Window *
       <Win95Window 
         title="audio_player.exe"
         isMinimized={windows.find(w => w.id === 'audio')?.isMinimized}
@@ -101,9 +100,9 @@ const Index = () => {
         onMaximize={() => handleMaximize('audio')}
         zIndex={windows.find(w => w.id === 'audio')?.zIndex}
         onFocus={() => handleWindowFocus('audio')}
-      >
+      >*/}
         <AudioPlayer />
-      </Win95Window>
+      {/*</Win95Window> */}
 
       {/* Socials Window */}
       <Win95Window 
@@ -189,7 +188,7 @@ const Index = () => {
 
       {/* Taskbar */}
       <Taskbar
-        Windows={windows}
+        windows={windows}
         onWindowClick={(id) => {
           handleWindowFocus(id);
           handleMinimize(id);
