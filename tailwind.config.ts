@@ -21,6 +21,7 @@ export default {
       colors: {
         win95: {
           gray: "#C0C0C0",
+          grayLight: "#dfdfdf",
           darkBorder: "#808080",
           lightBorder: "#FFFFFF",
           blue: "#000080",
@@ -65,6 +66,10 @@ export default {
       },
       boxShadow: {
         win95: "inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px grey, inset 2px 2px #fff",
+      },
+      zIndex: {
+        '100': '100',
+        'taskbar': '1000',
       },
     },
   },
