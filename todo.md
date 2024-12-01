@@ -1,6 +1,6 @@
 # Project Recommendations
 
-## UI/UX Enhancements
+## UI/UX 
 1. Add a Windows 95 startup sound when the page loads
 2. Implement draggable windows using react-draggable
 3. Add minimize/maximize functionality to the Win95Window component
